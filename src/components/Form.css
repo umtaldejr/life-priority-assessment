@@ -1,0 +1,20 @@
+.Form > h1 {
+  margin: 0 0 20px;
+}
+
+.Form > .option + .option {
+  margin-top: 10px;
+}
+
+.Form > .option > input {
+  cursor: pointer;
+}
+
+.Form > .option > label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.Form > button {
+  margin-top: 20px;
+}

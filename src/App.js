@@ -1,23 +1,63 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Form from './components/Form';
+import Results from './components/Results';
+import reallocate from './utils/reallocate';
 import './App.css';
 
+const INITIAL_STATE = {
+  options: [
+    'Family',
+    'Friends',
+    'Health and fitness',
+    'Income',
+    'Independence',
+    'Influence and power',
+    'Making use of talents',
+    'Personal growth',
+    'Positive impact on society',
+    'Prestige and status',
+    'Professional growth',
+    'Security',
+    'Spirituality/faith',
+    'Spouse/partner',
+    'Stimulating/rewarding work',
+    'Time for leisure and relaxation',
+    'Wealth/savings',
+    'Where you live',
+  ],
+  i: 1,
+  j: 0,
+};
+
 function App() {
+  const [{ options, i, j }, setState] = useState(INITIAL_STATE);
+
+  const handleSubmit = swap => {
+    const isLastComparison = j + 1 >= i;
+    const nextComparison = isLastComparison || swap;
+
+    setState({
+      options: swap ? reallocate(options, i, j) : options,
+      i: nextComparison ? i + 1 : i,
+      j: nextComparison ? 0 : j + 1
+    })
+  };
+
+  const hasComparion = i < options.length;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {hasComparion && (
+        <Form
+          options={[options[j], options[i]]}
+          onSubmit={handleSubmit}
+        />
+      )}
+      {
+        !hasComparion && (
+          <Results results={options} />
+        )
+      }
     </div>
   );
 }

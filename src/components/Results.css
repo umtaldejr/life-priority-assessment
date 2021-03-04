@@ -1,0 +1,21 @@
+.Result {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Result > li + li {
+  margin-top: 10px;
+}
+
+.Result > li.essentials {
+  color: #5cb85c;
+}
+
+.Result > li.nicetohaves {
+  color: #f0ad4e;
+}
+
+.Result > li.nonessentials {
+  color: #d9534f;
+}
